@@ -1,0 +1,54 @@
+{% set name = "nvim" %}
+{% set version = "0.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/neovim/neovim/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 2294caa9d2011996499fbd70e4006e4ef55db75b99b6719154c09262e23764ef
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - automake
+    - cmake
+    - libtool
+    - luajit
+    - m4
+    - ninja
+    - pkg-config
+    - unzip
+  host:
+    - gettext
+    - libiconv
+  run:
+    - gettext
+    - libiconv
+test:
+  commands:
+    - nvim --help
+
+about:
+  home: https://github.com/neovim/neovim
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Neovim is a project that seeks to aggressively refactor Vim.
+  description: |
+    Neovim is a project that seeks to aggressively refactor Vim in order to:
+    - Simplify maintenance and encourage contributions
+    - Split the work between multiple developers
+    - Enable advanced UIs without modifications to the core
+    - Maximize extensibility
+
+  doc_url: https://neovim.io/doc/general/
+  dev_url: https://github.com/neovim/neovim
+
+extra:
+  recipe-maintainers:
+    - benjaminrwilson
